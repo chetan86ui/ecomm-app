@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="product-list">
+    <div class="product-list" v-if="productLists">
       <div
         class="product"
         v-for="product in productList"
@@ -14,7 +14,7 @@
         <a @click="getcarousel(product.images)">
           <img :alt="product.hero.alt" :src="product.hero.href" />
         </a>
-        <ImageCarousel images="product.images" />
+        <ImageCarousel :images="productImages" />
       </div>
     </div>
   </div>
@@ -36,8 +36,9 @@ export default {
   },
   data() {
     return {
-      productList: undefined,
-      response: responseData
+      productList: "",
+      response: responseData,
+      productImages: ""
     };
   },
   mounted() {
@@ -60,6 +61,13 @@ export default {
         console.log(this.productList);
       });
   },
+  computed: {
+    productLists() {
+      console.log("helo", this.productList);
+      console.log("productImages", this.productImages);
+      return this.productList;
+    }
+  },
   methods: {
     getProductPrice: function(productPrice) {
       if (productPrice) {
@@ -77,8 +85,8 @@ export default {
         return `$${lowPrice} - $${highPrice}`;
       }
     },
-    getcarousel: function(productImages) {
-      console.log("hello", productImages);
+    getcarousel: function(images) {
+      return images;
     }
   }
 };
