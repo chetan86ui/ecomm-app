@@ -20,6 +20,13 @@
           :images="product.images"
           class="image-carousel"
         />
+        <span
+          class="close-btn"
+          v-bind:key="product.id"
+          v-show="isActive"
+          @click="closeCarousel()"
+          >X</span
+        >
       </div>
     </div>
   </div>
@@ -59,13 +66,10 @@ export default {
         }
       )
       .then(response => {
-        console.log("response", response.data);
         this.productList = response.data.groups;
       })
-      .catch(error => {
-        console.warn("Not good man", error);
+      .catch(() => {
         this.productList = this.response.groups;
-        console.log(this.productList);
       });
   },
   computed: {
@@ -92,9 +96,10 @@ export default {
     },
     getcarousel: function(images) {
       this.isActive = !this.isActive;
-      this.loadImageCarousel = !this.loadImageCarousel;
-      console.log("adas", this.productImages);
-      console.log("hello", images);
+      console.log("product images", images);
+    },
+    closeCarousel: function() {
+      this.isActive = !this.isActive;
     }
   }
 };
@@ -140,15 +145,27 @@ export default {
       }
     }
     .image-carousel {
-      // position: absolute;
-      // height: 100%;
-      // width: 100%;
-      // left: 0px;
-      // top: 0px;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0px;
+      top: 0px;
       .VueCarousel {
-        border:#000 solid 1px;
+        border: #000 solid 1px;
       }
     }
   }
+}
+.close-btn {
+  background: rgba($color: #000000, $alpha: 0.5);
+  color: #fff;
+  padding: 5px 10px 5px 10px;
+  line-height: 20px;
+  vertical-align: top;
+  border-radius: 100%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 </style>
