@@ -11,10 +11,15 @@
           class="price"
           v-html="getProductPrice(product.priceRange || product.price)"
         />
-        <a @click="getcarousel(product.images)">
+        <a @click="getcarousel(product)">
           <img :alt="product.hero.alt" :src="product.hero.href" />
         </a>
-        <ImageCarousel :images="productImages" />
+        <ImageCarousel
+          v-show="isActive"
+          v-bind:key="product.id"
+          :images="product.images"
+          class="image-carousel"
+        />
       </div>
     </div>
   </div>
@@ -38,7 +43,9 @@ export default {
     return {
       productList: "",
       response: responseData,
-      productImages: ""
+      productImages: "",
+      loadImageCarousel: false,
+      isActive: false
     };
   },
   mounted() {
@@ -63,8 +70,6 @@ export default {
   },
   computed: {
     productLists() {
-      console.log("helo", this.productList);
-      console.log("productImages", this.productImages);
       return this.productList;
     }
   },
@@ -86,7 +91,10 @@ export default {
       }
     },
     getcarousel: function(images) {
-      return images;
+      this.isActive = !this.isActive;
+      this.loadImageCarousel = !this.loadImageCarousel;
+      console.log("adas", this.productImages);
+      console.log("hello", images);
     }
   }
 };
@@ -129,6 +137,16 @@ export default {
       cursor: pointer;
       img {
         width: 100%;
+      }
+    }
+    .image-carousel {
+      // position: absolute;
+      // height: 100%;
+      // width: 100%;
+      // left: 0px;
+      // top: 0px;
+      .VueCarousel {
+        border:#000 solid 1px;
       }
     }
   }

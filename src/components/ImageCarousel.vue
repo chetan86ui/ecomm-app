@@ -1,18 +1,15 @@
 <template>
   <div>
-    {{ images }}
     <div>
       <carousel
         :perPageCustom="[
           [480, 1],
           [768, 1]
         ]"
-        ><slide><span class="label">1</span></slide>
-        <slide><span class="label">2</span></slide>
-        <slide><span class="label">3</span></slide>
-        <slide><span class="label">4</span></slide>
-        <slide><span class="label">5</span></slide>
-        <slide><span class="label">6</span></slide>
+      >
+        <slide v-for="(item, index) in images" v-bind:key="index">
+          <img :alt="item.alt" :src="item.href" />
+        </slide>
       </carousel>
     </div>
   </div>
