@@ -25,8 +25,7 @@ export default {
     Carousel,
     Slide
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
@@ -47,14 +46,14 @@ export default {
 .VueCarousel-pagination {
   background: rgba($color: #000000, $alpha: 0.5);
   position: relative;
-  top: 48vh;
+  //   top: 48vh;
 }
 .VueCarousel-dot-container {
-    margin-top: 0px !important;
+  margin-top: 0px !important;
 }
 
 .VueCarousel-dot {
-    margin-top: 0px !important;
+  margin-top: 0px !important;
 }
 
 .label {

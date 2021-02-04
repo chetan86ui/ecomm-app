@@ -11,22 +11,23 @@
           class="price"
           v-html="getProductPrice(product.priceRange || product.price)"
         />
-        <a @click="getcarousel(product)">
-          <img :alt="product.hero.alt" :src="product.hero.href" />
-        </a>
-        <ImageCarousel
-          v-show="isActive"
-          v-bind:key="product.id"
-          :images="product.images"
-          class="image-carousel"
-        />
-        <span
-          class="close-btn"
-          v-bind:key="product.id"
-          v-show="isActive"
-          @click="closeCarousel()"
-          >X</span
-        >
+        <div :class="hello" @click="getcarousel(product)">
+          <a @click="$event.target.classList.toggle('z-index-top')">
+            <img
+              :alt="product.hero.alt"
+              :src="product.hero.href"
+              class="test"
+            />
+          </a>
+          <ImageCarousel :images="product.images" class="image-carousel" />
+          <span
+            class="close-btn"
+            v-bind:key="product.id"
+            v-show="isActive"
+            @click="closeCarousel()"
+            >X
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -75,6 +76,10 @@ export default {
   computed: {
     productLists() {
       return this.productList;
+    },
+    hello() {
+      let className = "hello";
+      return className;
     }
   },
   methods: {
@@ -138,11 +143,13 @@ export default {
     }
     a {
       display: inline-block;
+      position: relative;
       width: 100%;
       cursor: pointer;
       img {
         width: 100%;
       }
+      z-index: 10;
     }
     .image-carousel {
       position: absolute;
@@ -150,6 +157,7 @@ export default {
       width: 100%;
       left: 0px;
       top: 0px;
+      z-index: 9;
       .VueCarousel {
         border: #000 solid 1px;
       }
@@ -167,5 +175,8 @@ export default {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+.z-index-top {
+  z-index: 12;
 }
 </style>
